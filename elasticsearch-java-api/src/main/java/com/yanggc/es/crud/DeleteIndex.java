@@ -19,17 +19,21 @@ public class DeleteIndex {
         // 创建客户端对象
         RestHighLevelClient client = new RestHighLevelClient(
                 RestClient.builder(new HttpHost("10.10.10.124", 9200, "http")));
+        try {
+            // 删除索引 - 请求对象
+            DeleteIndexRequest request = new DeleteIndexRequest("user2");
+            // 发送请求，获取响应
+            AcknowledgedResponse response = client.indices().delete(request, RequestOptions.DEFAULT);
+            // 操作结果
+            System.out.println("操作结果 ： " + response.isAcknowledged());
+            System.out.println(client);
 
-        // 删除索引 - 请求对象
-        DeleteIndexRequest request = new DeleteIndexRequest("user2");
-        // 发送请求，获取响应
-        AcknowledgedResponse response = client.indices().delete(request, RequestOptions.DEFAULT);
-        // 操作结果
-        System.out.println("操作结果 ： " + response.isAcknowledged());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // 关闭客户端连接
+            client.close();
+        }
 
-
-        System.out.println(client);
-        // 关闭客户端连接
-        client.close();
     }
 }
