@@ -4,6 +4,8 @@ server:
 spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://192.168.3.137:31295/ldd_new
+    url: jdbc:mysql://192.168.3.135:30117/ldd_new
     username: root
     password: root
+mybatis-plus:
+  type-handlers-package: com.yanggc
