@@ -1,9 +1,2 @@
 server:
-  port: 7000
-#配置数据源
-spring:
-  datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://192.168.3.137:31295/ldd_new
-    username: root
-    password: root
+  port: 8000
