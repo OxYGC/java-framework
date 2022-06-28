@@ -38,8 +38,7 @@ select host, user, authentication_string, plugin from mysql.user;
 
 - [下载并解压 canal.deployer-x.x.x.tar.gz](https://github.com/alibaba/canal/releases)
 
-
-  在deployer项目里面的conf\example\instance.properties改写自己的配置
+- 在deployer项目里面的conf\example\instance.properties改写自己的配置
 ```properties
 # position info
 
@@ -51,11 +50,27 @@ canal.instance.defaultDatabaseName = test1         #数据库库名
 canal.instance.connectionCharset=UTF-8             #数据库字符集
 
 # table regex
-# 正则匹配默认.*\\..*，其中前面.*代表库名，后面.*代表表名
+# 正则匹配默认.*\\..*，其中前面.*代表库名，后面.*代表表名 下面表示只同步test1数据库
 canal.instance.filter.regex=test1\\..*
+
+# table regex
+
 
 
 ```
+
+# MQ配置
+
+> mq的交换机和队列可通过后面java代码自动生成，无需自己手动建立
+> conf/canal.properties
+```properties
+
+
+```
+
+
+
+
 其他默认即可，改完后进行启动
 
 
