@@ -12,6 +12,7 @@
     <modules>
         <module>boot270</module>
         <module>data-dispatcher</module>
+        <module>canal-adapter</module>
     </modules>
 
     <!--  配置项  -->

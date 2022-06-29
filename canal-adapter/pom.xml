@@ -12,16 +12,13 @@
 
 
   <groupId>com.yanggc</groupId>
-  <artifactId>data-dispatcher</artifactId>
+  <artifactId>canal-adapter</artifactId>
   <version>1.0-SNAPSHOT</version>
-
-
 
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-
   <dependencies>
     <!--   Boot相关依赖     -->
     <dependency>
