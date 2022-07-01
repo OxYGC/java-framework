@@ -1,0 +1,7 @@
+server:
+  port: 7000
+
+# es服务地址 / 服务端口
+elasticsearch:
+  host: mws.com
+  port: 9200

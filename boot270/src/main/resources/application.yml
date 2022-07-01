@@ -1,9 +1,10 @@
-server:
-  port: 8000
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: dev
+  application:
+    name: boot270
 
 
-# es服务地址 / 服务端口
-elasticsearch:
-  host: 10.10.10.124
-  port: 9200
 
