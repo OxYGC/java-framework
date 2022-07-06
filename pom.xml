@@ -11,6 +11,8 @@
 
     <modules>
         <module>boot270</module>
+        <module>cdc-connector</module>
+        <module>flink</module>
     </modules>
 
     <!--  配置项  -->
