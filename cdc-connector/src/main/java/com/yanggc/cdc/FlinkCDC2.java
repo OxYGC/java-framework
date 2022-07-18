@@ -20,7 +20,7 @@ public class FlinkCDC2 {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
-        //1.1 开启CK
+        //1.1 开启 Checkpoint
         env.enableCheckpointing(5000);
         env.getCheckpointConfig().setCheckpointTimeout(10000);
         env.getCheckpointConfig().setCheckpointingMode(CheckpointingMode.EXACTLY_ONCE);
@@ -36,7 +36,7 @@ public class FlinkCDC2 {
                 .password("useradmin")
                 //flinkcdc 下面的所有表
                 .databaseList("flinkcdc.*")
-//                .tableList("cdc_test.user_info")
+//                .tableList("flinkcdc.user_info")
                 //使用自定义的反序列化器
                 .deserializer(new CustomerDeserializationSchema())
                 .startupOptions(StartupOptions.initial())
