@@ -31,16 +31,15 @@ public class CDC4SQLTest {
                 " description STRING" +
                 ") WITH (" +
                 " 'connector' = 'mysql-cdc'," +
-                " 'hostname' = '192.168.64.128'," +
-                " 'port' = '4306'," +
+                " 'hostname' = '192.168.1.220'," +
+                " 'port' = '3308'," +
                 " 'username' = 'root'," +
                 " 'password' = 'useradmin'," +
                 " 'database-name' = 'flinkcdc'," +
                 " 'table-name' = 'products'" +
                 ")");
-
-        //tableEnv.executeSql("select * from user_info1").print();
         Table table = tableEnv.sqlQuery("select * from products");
+
         DataStream<Tuple2<Boolean, Row>> retractStream = tableEnv.toRetractStream(table, Row.class);
         retractStream.print();
         env.execute("flinkCdcSql");

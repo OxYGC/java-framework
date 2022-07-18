@@ -1,10 +1,11 @@
 package com.yanggc.example;
 
 
-import com.alibaba.ververica.cdc.connectors.mysql.MySQLSource;
-import com.alibaba.ververica.cdc.connectors.mysql.table.StartupOptions;
-import com.alibaba.ververica.cdc.debezium.DebeziumSourceFunction;
-import com.alibaba.ververica.cdc.debezium.StringDebeziumDeserializationSchema;
+
+import com.ververica.cdc.connectors.mysql.MySqlSource;
+import com.ververica.cdc.connectors.mysql.table.StartupOptions;
+import com.ververica.cdc.debezium.DebeziumSourceFunction;
+import com.ververica.cdc.debezium.StringDebeziumDeserializationSchema;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
@@ -21,19 +22,26 @@ public class CDC4StreamTest {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
-        DebeziumSourceFunction<String> sourceFunction = MySQLSource.<String>builder()
-                .hostname("192.168.64.128")
-                .port(4306)
-                .databaseList("flinkcdc.*") // set captured database, If you need to synchronize the whole database, Please set tableList to ".*".
-//                .tableList("flinkcdc.orders") // set captured table
+        //通过FlinkCDC构建SourceFunction
+        DebeziumSourceFunction<String> sourceFunction = MySqlSource.<String>builder()
+                .hostname("192.168.1.220")
+                .port(3308)
+                //flinkcdc 下面的所有表
+                .databaseList("flinkcdc.*")
+                //可以指定个别的表
+//                .tableList("flinkcdc.orders")
                 .username("root")
                 .password("useradmin")
                 .startupOptions(StartupOptions.initial())
+                //反序列化
                 .deserializer(new StringDebeziumDeserializationSchema())
                 .build();
 
         DataStreamSource<String> streamSource = env.addSource(sourceFunction);
+
         streamSource.print();
-        env.execute("flinkCdc");
+
+
+        env.execute("CDC4StreamTest");
     }
 }
