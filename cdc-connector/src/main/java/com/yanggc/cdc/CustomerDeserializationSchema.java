@@ -77,6 +77,7 @@ public class CustomerDeserializationSchema implements DebeziumDeserializationSch
         //获取操作类型
         Envelope.Operation operation = Envelope.operationFor(sourceRecord);
         result.put("op", operation);
+
         //输出数据
         collector.collect(result.toJSONString());
 

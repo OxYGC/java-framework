@@ -1,6 +1,6 @@
 package com.yanggc.example.deserial;
 
-import com.alibaba.ververica.cdc.debezium.DebeziumDeserializationSchema;
+import com.ververica.cdc.debezium.DebeziumDeserializationSchema;
 import io.debezium.data.Envelope;
 import net.minidev.json.JSONObject;
 import org.apache.flink.api.common.typeinfo.BasicTypeInfo;
