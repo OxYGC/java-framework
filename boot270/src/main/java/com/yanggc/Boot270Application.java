@@ -32,6 +32,6 @@ public class Boot270Application implements CommandLineRunner {
 
         // 发送字符串
         SendResult sendResult = rocketMQTemplate.syncSend(STRING_TOPIC, "Hello, World!");
-
+        System.out.println(sendResult);
     }
 }
