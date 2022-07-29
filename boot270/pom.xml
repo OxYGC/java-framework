@@ -73,8 +73,12 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.13.2</version>
         </dependency>
-
-
+        <!--    java8 对 jackson的反序列话时间兼容    -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.13.0</version>
+        </dependency>
     </dependencies>
 
 </project>
