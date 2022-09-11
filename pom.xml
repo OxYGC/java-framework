@@ -11,6 +11,7 @@
 
     <modules>
         <module>boot270</module>
+        <module>cloud-api</module>
     </modules>
 
     <!--  配置项  -->
