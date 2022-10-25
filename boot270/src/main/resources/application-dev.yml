@@ -1,2 +1,19 @@
 server:
   port: 7000
+
+
+spring:
+  datasource:
+    type: org.springframework.jdbc.datasource.DriverManagerDataSource
+    url: jdbc:mysql://192.168.1.1:30117/xxx_xxx
+    username: root
+    password: root
+  # batch
+  batch:
+    job:
+      # 默认自动执行定义的Job(true)，改为false，需要jobLaucher.run执行
+      enabled: false
+    # spring batch在数据库里面创建默认的数据表，如果不是always则会提示相关表不存在
+      initialize-schema: always
+    # 设置batch表的前缀
+#    table-prefix: csv-batch
