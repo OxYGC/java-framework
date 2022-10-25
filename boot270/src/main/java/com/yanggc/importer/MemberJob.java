@@ -1,9 +1,8 @@
-package com.yanggc.batch;
+package com.yanggc.importer;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.StepContribution;
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.scope.context.ChunkContext;
@@ -19,10 +18,9 @@ import javax.annotation.Resource;
  *
  * @author: YangGC
  */
-
 @Configuration
-@EnableBatchProcessing
-public class BatchJobTest {
+public class MemberJob {
+
     /**
      * 创建任务对象
      */
@@ -41,28 +39,22 @@ public class BatchJobTest {
      * @return
      */
     @Bean
-    public Job helloWorld() {
-        return jobBuilderFactory.get("helloWorld")
+    public Job importMemberJob() {
+        return jobBuilderFactory.get("importMemberJob")
                 //执行step
-                .start(step()).build();
+                .start(importMemberJobStep()).build();
     }
 
     @Bean
-    public Step step() {
-        try {
-            return stepBuilderFactory.get("step").tasklet(new Tasklet() {
-                @Override
-                public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext){
-                    System.out.println("SpringBatch Hello World！");
-                    // 返回的状态
-                    return RepeatStatus.FINISHED;
-                }
-            }).build();
-
-        }catch (Exception e){
-         e.printStackTrace();
-        }
-        return null;
+    public Step importMemberJobStep() {
+        return stepBuilderFactory.get("importMemberJobStep").tasklet(new Tasklet() {
+            @Override
+            public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext){
+                System.out.println("SpringBatch Hello World！");
+                // 返回的状态
+                return RepeatStatus.FINISHED;
+            }
+        }).build();
     }
 
 }
