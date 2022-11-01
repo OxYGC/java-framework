@@ -1,5 +1,6 @@
 package com.yanggc.Controller;
 
+import com.yanggc.annotation.log.ServeInteractRecdLog;
 import com.yanggc.pojo.MemberPO;
 import org.springframework.batch.core.launch.support.SimpleJobLauncher;
 import org.springframework.batch.item.file.FlatFileItemReader;
@@ -8,6 +9,7 @@ import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -27,8 +29,9 @@ public class JobLauncherController {
         return jobLauncher;
     }
 
+    @ServeInteractRecdLog
     @RequestMapping("/reader")
-    public FlatFileItemReader<MemberPO> reader() {
+    public FlatFileItemReader<MemberPO> reader(@RequestParam(value = "str",required = false) String str) {
         // 使用FlatFileItemReader去读cvs文件，一行即一条数据
         FlatFileItemReader<MemberPO> reader = new FlatFileItemReader<>();
         // 设置文件处在路径
