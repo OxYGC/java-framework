@@ -46,15 +46,15 @@ public class InteractRecdLogResolver {
     }
 
 
-    @AfterReturning(value = "interactRecdLogPointCut()", returning = "returnParams")
-    public void InteractRecdLog(JoinPoint joinPoint, Object returnParams) throws IOException {
+    @AfterReturning(value = "interactRecdLogPointCut()", returning = "returnObj")
+    public void InteractRecdLog(JoinPoint joinPoint, Object returnObj) throws IOException {
         Object[] args = joinPoint.getArgs();
         List<Object> reqArgs = Arrays.asList(args);
         for ( Object  object : reqArgs) {
             //todo 数据持久化到 Mongo / InnoDB / ES
             System.out.println("数据持久化...." + object.toString());
         }
-        System.out.println(returnParams.toString());
+        System.out.println(returnObj.toString());
     }
 
 }
