@@ -5,3 +5,11 @@ spring:
     active: dev
   application:
     name: boot270
+#  cloud:
+#    config:
+#      enabled: true
+
+
+config:
+  version: 100
+  platform: linux
