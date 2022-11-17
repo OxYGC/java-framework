@@ -1,62 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration debug="false" scan="true" scanPeriod="1 seconds">
-    <springProperty scope="context" name="appName" source="spring.application.name" />
-    <springProperty scope="context" name="port" source="server.port" />
+
+<!--该日志将日志级别不同的log信息保存到不同的文件中 -->
+<configuration scan="true" scanPeriod="60 seconds">
+    <springProperty scope="context" name="appName" source="spring.application.name"/>
+    <springProperty scope="context" name="port" source="server.port"/>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
     <contextName>logback</contextName>
     <!--  Log日志路径  -->
     <property name="log.path" value="/data/logs/demo//${appName}/${port}"/>
+    <property name="service_Name" value="location-service"/>
+    <springProperty scope="context" name="springAppName" source="spring.application.name"/>
 
+    <!-- 控制台的日志输出样式 -->
+    <property name="CONSOLE_LOG_PATTERN" value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p})
+    %clr(${PID:- }) %clr(${springAppName}){magenta} %clr(---){faint} %logger %clr([%15.15t]){faint}
+    %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+
+    <!-- 控制台输出 -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n</pattern>
-        </encoder>
-    </appender>
-
-    <!--滚动文件-->
-    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/info.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.path}.%d{yyyy-MM-dd}.zip</fileNamePattern>
-            <maxHistory>30</maxHistory><!--保存最近30天的日志-->
-            <!--所有的日志文件最大大小，超过就会删除旧的日志-->
-<!--            <totalSizeCap>200MB</totalSizeCap>-->
-        </rollingPolicy>
-        <encoder>
-            <pattern>%date %level [%thread] %logger{36} [%file : %line] %msg%n</pattern>
-        </encoder>
-    </appender>
-
-
-
-    <!--输出到文件,只记录ERROR级别信息-->
-    <appender name="error_file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/error.log</file>
-        <!-- 日志记录器的滚动策略，按日期，按大小记录 -->
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 每天日志归档路径以及格式  %i是索引 超过20MB 日志文件索引会以0开始-->
-            <fileNamePattern>${log.path}/error/%d{yyyy-MM-dd}.zip</fileNamePattern>
-            <maxHistory>30</maxHistory>
-        </rollingPolicy>
-
-        <encoder>
-            <pattern>%date %level [%thread] %logger{36} [%file : %line] %msg%n</pattern>
-        </encoder>
-
-        <!-- 此日志文件只记录error级别的 -->
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>ERROR</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
         </filter>
-        <!-- 追加方式记录日志 -->
-        <append>true</append>
+        <!-- 日志输出编码 -->
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
     </appender>
 
+    <!-- 按照每天生成INFO日志文件 -->
+    <appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <fileNamePattern>logs/${service_Name}-info-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <!-- 单个日志文件最多100MB, 30天的日志周期，最大不能超过20GB -->
+            <maxFileSize>100MB</maxFileSize>
+            <MaxHistory>30</MaxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <!-- 日志输出编码 -->
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
 
-    <root level="info">
+    <!-- 按照每天生成ERROR日志文件 -->
+    <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <fileNamePattern>logs/${service_Name}-error-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <!-- 单个日志文件最多100MB, 30天的日志周期，最大不能超过20GB -->
+            <maxFileSize>100MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <!-- 日志输出编码 -->
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 日志输出级别 -->
+    <root level="INFO">
         <appender-ref ref="console"/>
-        <appender-ref ref="file"/>
+        <appender-ref ref="INFO_FILE"/>
+        <appender-ref ref="ERROR_FILE"/>
     </root>
-
 </configuration>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
