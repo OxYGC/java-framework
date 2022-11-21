@@ -34,13 +34,15 @@ public class Demo {
     @Resource
     ContextRefresher contextRefresher;
 
+    @Resource
+    ApplicationContext applicationContext;
+
     @GetMapping("/show/version")
     public String showVersion() {
         return "version=" + version + "-platform=" + platform;
     }
 
-    @Autowired
-    ApplicationContext applicationContext;
+
 
     /**
      * 动态刷新配置

@@ -1,8 +1,21 @@
 spring:
+  cloud:
+    nacos:
+      # nacos注册中心相关
+      discovery:
+        server-addr: 127.0.0.1:8848
   main:
     allow-bean-definition-overriding: true
+  application:
+    name: service-provider
+
+        # 作为注册中心的nacos服务器地址，默认值：${spring.cloud.nacos:server-addr}
+        # 服务注册在nacso上的命名空间ID，默认值：public
+#        namespace: public
 #  profiles:
 #    active: dev
 config:
   version: 100
   platform: linux
+server:
+  port: 8888
