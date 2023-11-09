@@ -1,0 +1,15 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: dev
+  application:
+    name: framework-Order
+#  cloud:
+#    config:
+#      enabled: true
+
+
+config:
+  version: 100
+  platform: linux

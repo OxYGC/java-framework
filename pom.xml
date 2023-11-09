@@ -12,6 +12,8 @@
     <modules>
         <module>boot270</module>
         <module>gateway</module>
+        <module>framework-common</module>
+        <module>framework-order</module>
     </modules>
 
     <!--  配置项  -->

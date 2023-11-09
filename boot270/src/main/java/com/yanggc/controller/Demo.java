@@ -1,5 +1,7 @@
 package com.yanggc.controller;
 
+import com.yanggc.pojo.Staff;
+import com.yanggc.pojo.event.StaffEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -9,6 +11,7 @@ import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -39,7 +42,7 @@ public class Demo {
         return "version=" + version + "-platform=" + platform;
     }
 
-    @Autowired
+    @Resource
     ApplicationContext applicationContext;
 
     /**
@@ -60,6 +63,23 @@ public class Demo {
         //异步调用refresh方法，避免阻塞一直等待无响应
         new Thread(() -> contextRefresher.refresh()).start();
         return "version=" + version + "-platform=" + platform;
+    }
+
+
+
+    @GetMapping("/test")
+    public String test(@RequestParam String param) {
+
+
+        StaffEvent staffEvent = new StaffEvent(new Staff(1L,param));
+
+        // 发送商品消息
+        // this.sendMsg(ProductMsg.MA_UPDATE, productDto.getItemCode());
+        // 发布商品变更消息
+        staffEvent.pubAppcSiteMsg();
+
+
+        return param;
     }
 
 

@@ -9,10 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author: YangGC
  */
 @SpringBootApplication
-public class Boot270Application {
+public class FrameworkOrderApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Boot270Application.class, args);
+        SpringApplication.run(FrameworkOrderApplication.class, args);
     }
 
 }
