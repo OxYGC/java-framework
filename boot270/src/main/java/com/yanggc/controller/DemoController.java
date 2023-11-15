@@ -1,8 +1,10 @@
 package com.yanggc.controller;
 
+import com.yanggc.annotation.Encryption;
+import com.yanggc.pojo.DemoResultVO;
+import com.yanggc.pojo.base.R;
 import com.yanggc.pojo.Staff;
 import com.yanggc.pojo.event.StaffEvent;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.context.refresh.ContextRefresher;
@@ -27,7 +29,7 @@ import java.util.Map;
 @RefreshScope
 @RestController
 @RequestMapping("/demo")
-public class Demo {
+public class DemoController {
     @Value("${config.version}")
     private String version;
 
@@ -81,6 +83,24 @@ public class Demo {
 
         return param;
     }
+
+
+    /**
+     * 测试返回参数
+     * @return
+     */
+    @Encryption
+    @GetMapping("/testEncryptionVO")
+    public R<DemoResultVO> testEncryptionVO(){
+
+
+        return R.("不一样的科技宅");
+    }
+
+
+
+
+
 
 
 }
