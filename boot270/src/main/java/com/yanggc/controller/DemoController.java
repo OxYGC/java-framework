@@ -92,9 +92,10 @@ public class DemoController {
     @Encryption
     @GetMapping("/testEncryptionVO")
     public R<DemoResultVO> testEncryptionVO(){
-
-
-        return R.("不一样的科技宅");
+        DemoResultVO demoResultVO = new DemoResultVO();
+//        return R.("不一样的科技宅");
+        demoResultVO.setPhoneNo("13312341234");
+        return R.success(demoResultVO);
     }
 
 
