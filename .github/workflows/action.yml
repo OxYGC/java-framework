@@ -27,7 +27,8 @@ jobs:
       
     # *2.1发布到DockerHub  (修改成uses后面修改成你的仓库路径@分支)
     - name: Publish to Docker Repository
-      uses: OxYGC/java-framework@boot270-docker
+#      uses: OxYGC/java-framework@boot270-docker
+      uses: elgohr/Publish-Docker-Github-Action@master
     # *name改成你DockerHub仓库地址：username和password这里改成你GitHub中配置的敏感环境变量
       with:
         name: keygenee/priv-demo:iamtagname
