@@ -31,5 +31,5 @@ jobs:
     # *name改成你DockerHub仓库地址：username和password这里改成你GitHub中配置的敏感环境变量
       with:
         name: keygenee/priv-demo:iamtagname
-        username: ${{ docker-secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ docker-secrets.DOCKER_HUB_PASSWORD }}
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
