@@ -1,4 +1,4 @@
-FROM java:openjdk-8-jre-alpine
+FROM java:8
 
 WORKDIR /data
 COPY boot270/target/*.jar /data/apps/app.jar
