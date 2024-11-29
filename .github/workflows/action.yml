@@ -19,8 +19,6 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: Debug Environment Variables
-      run: echo "Docker username:"  ${{ secrets.INPUT_USERNAME }}
-      
     # *2 Docker镜像打包 （--file默认在action的同目录寻找，如果不在相同目录要指定Dockerfile的目录 --tag后可以修改成你的镜像名称）
     - name: BuildDockerImage
       run: docker build . --file  boot270/Dockerfile --tag my-image-name:$(date +%s)
