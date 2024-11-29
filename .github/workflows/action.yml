@@ -26,6 +26,8 @@ jobs:
       run: docker build . --file  boot270/Dockerfile --tag my-image-name:$(date +%s)
       
     # 2.1发布到DockerHub  (uses固定使用elgohr大神的action不需要修改)
+    - name: Debug Environment Variables
+      run: echo "Docker username: ${{ secrets.INPUT_PASSWORD }}" && echo "Docker password:${{ secrets.INPUT_USERNAME }}"
     - name: Publish to Docker Repository
       uses: elgohr/Publish-Docker-Github-Action@v5
     # *name改成你DockerHub仓库地址：username和password这里改成你GitHub中配置的敏感环境变量
