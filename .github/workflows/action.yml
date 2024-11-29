@@ -19,18 +19,16 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
-    # *2 Docker镜像打包 （--file默认在action的同目录寻找，如果不在相同目录要指定Dockerfile的目录 --tag后可以修改成你的镜像名称）
-#    - name: Prepare Build Context
-#      run: mkdir -p boot270/target && mv boot270/target/*.jar boot270/target/
+    # 2 Docker相关操作
+    # *2.1 --file默认在action的同目录寻找，如果不在相同目录要指定Dockerfile的目录 --tag后可以修改成你的镜像名称
     - name: BuildDockerImage
       run: docker build . --file  boot270/Dockerfile --tag my-image-name:$(date +%s)
-    # 2.1发布到DockerHub  (uses固定使用elgohr大神的action不需要修改)
-
+    # 2.2 发布到DockerHub  (uses固定使用elgohr大神的action不需要修改)
     - name: Publish to Docker Repository
       uses: elgohr/Publish-Docker-Github-Action@v5
-    # *name改成你DockerHub仓库地址：username和password这里改成你GitHub中配置的敏感环境变量
+    # *2.3 name改成你DockerHub仓库地址：username和password这里改成你GitHub中配置的敏感环境变量
       with:
         name: keygenee/priv-demo:iamtagname
         password: ${{ secrets.INPUT_PASSWORD }}
-        username: keygenee
+        username: ${{ secrets.INPUT_USERNAME }}
         dockerfile: ./boot270/Dockerfile
