@@ -1,2 +1,7 @@
-server:
-  port: 8000
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: dev
+  application:
+    name: boot270
