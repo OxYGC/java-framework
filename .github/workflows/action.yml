@@ -33,3 +33,4 @@ jobs:
         name: keygenee/priv-demo:iamtagname
         password: ${{ secrets.INPUT_PASSWORD }}
         username: keygenee
+        dockerfile: ./boot270/Dockerfile
