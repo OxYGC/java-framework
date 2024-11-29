@@ -21,7 +21,7 @@ jobs:
 
     # *2 Docker镜像打包 （--file默认在action的同目录寻找，如果不在相同目录要指定Dockerfile的目录 --tag后可以修改成你的镜像名称）
     - name: BuildDockerImage
-      run: docker build . --file  boot270/Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file  /boot270/Dockerfile --tag my-image-name:$(date +%s)
     # 2.1发布到DockerHub  (uses固定使用elgohr大神的action不需要修改)
 
     - name: Publish to Docker Repository
