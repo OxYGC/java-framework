@@ -31,4 +31,4 @@ jobs:
       with:
         name: keygenee/priv-demo:iamtagname
         password: ${{ secrets.INPUT_PASSWORD }}
-        username: ${{ secrets.INPUT_USERNAME }}
+        username: keygenee
