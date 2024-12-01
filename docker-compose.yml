@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  app:
+    image: boot-270-img
+    container_name: boot-270-container
+    build:
+      context: .
+      dockerfile: ./boot270/Dockerfile
+    ports:
+      - "10000:10000"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    volumes:
+      - ./logs:/app/logs
+    restart: always
+
+
